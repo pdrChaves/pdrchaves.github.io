@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>~/pdrChaves — full-stack dev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="window">
+
+  <div class="titlebar">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="titlebar-title">— pdrChaves@portfolio: ~/about —</div>
+    <div class="titlebar-status">bash · 80x24</div>
+  </div>
+
+  <div class="content">
+
+    <!-- HEADER ASCII + AVATAR -->
+    <div class="header-row">
+      <pre class="ascii">
+ ██████╗ ███████╗██╗   ██╗███████╗██╗      ██████╗ ██████╗ ███████╗██████╗
+ ██╔══██╗██╔════╝██║   ██║██╔════╝██║     ██╔═══██╗██╔══██╗██╔════╝██╔══██╗
+ ██║  ██║█████╗  ██║   ██║█████╗  ██║     ██║   ██║██████╔╝█████╗  ██████╔╝
+ ██║  ██║██╔══╝  ╚██╗ ██╔╝██╔══╝  ██║     ██║   ██║██╔═══╝ ██╔══╝  ██╔══██╗
+ ██████╔╝███████╗ ╚████╔╝ ███████╗███████╗╚██████╔╝██║     ███████╗██║  ██║
+ ╚═════╝ ╚══════╝  ╚═══╝  ╚══════╝╚══════╝ ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═╝
+
+ ~/pdrChaves · full-stack</pre>
+
+      <div class="avatar-placeholder">
+        <img src="perfil.jpeg" alt="Pedro Chaves" class="avatar">
+      </div>
+    </div>
+
+    <div class="out fade-in">
+      <p><span class="comment"># bem-vindo. role para navegar. tudo é seguro — não vou rodar <code>rm -rf /</code> de verdade.</span></p>
+    </div>
+
+    <!-- WHOAMI -->
+    <div class="prompt"><span class="user">pdrChaves</span><span class="at">@</span><span class="host">portfolio</span><span class="sym">:</span><span class="path">~</span><span class="sym">$</span> whoami</div>
+    <div class="out fade-in">
+      <p><span class="arrow">→</span><strong>Pedro Augusto Chaves da Silva</strong></p>
+      <p><span class="label">role:</span> full-stack developer</p>
+      <p><span class="label">localização:</span> Cruzeiro, São Paulo · GMT-3</p>
+      <p><span class="label">formação:</span> Análise e Desenvolvimento de Sistemas · FATEC Cruzeiro</p>
+      <p><span class="label">interesse:</span> Desenvolvimento web, inteligência artificial e automações</p>
+      <p><span class="label">status:</span> <span style="color: var(--accent);">● disponível para projetos</span></p>
+    </div>
+
+    <!-- CAT ABOUT -->
+    <div class="prompt"><span class="user">pdrChaves</span><span class="at">@</span><span class="host">portfolio</span><span class="sym">:</span><span class="path">~</span><span class="sym">$</span> cat about.txt</div>
+    <div class="out fade-in">
+      <p>Comecei a programar no fim de 2024 e logo vi que a área fazia sentido pra mim. Hoje curso ADS na FATEC Cruzeiro e aprendo construindo projetos por conta própria. Me prende mais a satisfação de resolver um problema difícil do que qualquer tecnologia específica.</p>
+      <br>
+      <p>Tenho preferência por backend, mas pratico frontend em paralelo pra ser um desenvolvedor completo. Ultimamente venho explorando automações e estudando IA a fundo. Quando escrevo código, me preocupo em deixá-lo legível e bem documentado — a clareza de hoje é o tempo que economizo amanhã.</p>
+      <br>
+      <p>Fora do código, sou gamer desde criança — daquele tipo completista, que não larga até fazer a platina dos jogos favoritos, e que ainda volta nos clássicos retrô. Curto rock e suas vertentes, e gosto de carros de longa data. Cresci consumindo Velozes e Furiosos, Matrix e Star Wars, e acho que isso explica boa parte de quem sou hoje.</p>
+    </div>
+
+    <!-- LS STACK -->
+    <div class="prompt"><span class="user">pdrChaves</span><span class="at">@</span><span class="host">portfolio</span><span class="sym">:</span><span class="path">~/stack</span><span class="sym">$</span> ls -la</div>
+    <div class="out fade-in">
+      <table class="skill-table">
+        <tr>
+          <td>construindo/</td>
+          <td>java, node.js, c# (.maui)</td>
+        </tr>
+        <tr>
+          <td>estudando/</td>
+          <td>react, python, postgresql</td>
+        </tr>
+        <tr>
+          <td>ambiente/</td>
+          <td>docker, linux, git</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- PROJETOS -->
+    <div class="prompt"><span class="user">pdrChaves</span><span class="at">@</span><span class="host">portfolio</span><span class="sym">:</span><span class="path">~/projects</span><span class="sym">$</span> ls --sort=date</div>
+    <div class="out fade-in">
+
+      <a href="https://github.com/Brunokenji1/ACELERA2" target="_blank" rel="noopener" class="project">
+        <div class="project-head">
+          <span class="project-name">→ aplicativo para preparação para vestibulares</span>
+          <span class="project-meta">2026 · acadêmico · grupo (4) · <span class="project-link">ver repositório ↗</span></span>
+        </div>
+        <p class="project-desc">Aplicação web para apoiar jovens na preparação para vestibulares, com foco no ENEM. Atuo no backend, cuidando da lógica do servidor e da integração com o time de frontend. Projeto quase finalizado.</p>
+        <div class="tags">
+          <span class="tag">node.js</span>
+          <span class="tag">backend</span>
+          <span class="tag">api</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/pdrChaves/FitShare" target="_blank" rel="noopener" class="project">
+        <div class="project-head">
+          <span class="project-name">→ aplicativo de saúde integral e inclusão física</span>
+          <span class="project-meta">2025 · acadêmico · dupla · <span class="project-link">ver repositório ↗</span></span>
+        </div>
+        <p class="project-desc">Aplicativo mobile voltado a idosos e pessoas com dificuldades físicas, oferecendo assistência durante a prática de exercícios. Desenvolvimento dividido 50/50 com colega de faculdade. Protótipo funcional em estágio inicial — retomada prevista para o próximo semestre.</p>
+        <div class="tags">
+          <span class="tag">c#</span>
+          <span class="tag">.maui</span>
+          <span class="tag">mobile</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- LOG JORNADA -->
+    <div class="prompt"><span class="user">pdrChaves</span><span class="at">@</span><span class="host">portfolio</span><span class="sym">:</span><span class="path">~</span><span class="sym">$</span> cat journey.log</div>
+    <div class="out fade-in">
+
+      <div class="log-line">
+        <span class="log-date">[fim 2024]</span>
+        <span class="log-tag-info">[INIT]</span>
+        <span class="log-text">Comecei a programar e ingressei no curso de <strong>Análise e Desenvolvimento de Sistemas</strong> na FATEC Cruzeiro</span>
+      </div>
+
+      <div class="log-line">
+        <span class="log-date">[2025]</span>
+        <span class="log-tag-learn">[LEARN]</span>
+        <span class="log-text">Aprofundei estudos em <strong>Java</strong> e <strong>C#</strong> paralelamente ao curso</span>
+      </div>
+
+      <div class="log-line">
+        <span class="log-date">[2025]</span>
+        <span class="log-tag-build">[BUILD]</span>
+        <span class="log-text">Desenvolvi em dupla um aplicativo mobile em <strong>C# (.MAUI)</strong> para apoio a idosos e pessoas com dificuldades físicas</span>
+      </div>
+
+      <div class="log-line">
+        <span class="log-date">[início 2026]</span>
+        <span class="log-tag-learn">[LEARN]</span>
+        <span class="log-text">Comecei a estudar <strong>Node.js</strong>, expandindo meu foco para desenvolvimento backend web</span>
+      </div>
+
+      <div class="log-line">
+        <span class="log-date">[2026]</span>
+        <span class="log-tag-build">[BUILD]</span>
+        <span class="log-text">Atuando no backend <strong>(Node.js)</strong> de uma aplicação web para preparação ao ENEM, em grupo de 4</span>
+      </div>
+
+    </div>
+
+    <!-- CERTIFICADOS (carregados dinamicamente do GitHub) -->
+    <div class="prompt"><span class="user">pdrChaves</span><span class="at">@</span><span class="host">portfolio</span><span class="sym">:</span><span class="path">~/certs</span><span class="sym">$</span> curl github.com/pdrChaves/Certificates-of-Completion/certificados.json</div>
+    <div class="out fade-in">
+      <p class="cert-hint">passe o mouse para pausar</p>
+      <div class="certs-wrapper">
+        <div class="certs-track" id="certsTrack">
+          <p class="cert-status" id="certsStatus">carregando certificados...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTATO -->
+    <div class="prompt"><span class="user">pdrChaves</span><span class="at">@</span><span class="host">portfolio</span><span class="sym">:</span><span class="path">~</span><span class="sym">$</span> ./contact.sh</div>
+    <div class="out fade-in">
+      <p><span class="comment"># abrindo canais...</span></p>
+      <div class="contact-box">
+        <p style="margin-bottom: 12px;"><span class="label">email:</span> <a href="mailto:dev.pedrochaves@gmail.com">dev.pedrochaves@gmail.com</a></p>
+        <p style="margin-bottom: 12px;"><span class="label">github:</span> <a href="https://github.com/pdrChaves" target="_blank">github.com/pdrChaves ↗</a></p>
+        <p style="margin-bottom: 12px;"><span class="label">linkedin:</span> <a href="https://www.linkedin.com/in/pdr-chaves/" target="_blank">linkedin.com/in/pdr-chaves ↗</a></p>
+        <p><span class="label">twitter:</span> <a href="https://x.com/_devPdr" target="_blank">@_devPdr ↗</a></p>
+      </div>
+      <p style="margin-top: 10px;"><span class="comment"># aberto a freelas, contratos e papos sobre tech.</span></p>
+    </div>
+
+    <!-- EXIT -->
+    <div class="prompt"><span class="user">pdrChaves</span><span class="at">@</span><span class="host">portfolio</span><span class="sym">:</span><span class="path">~</span><span class="sym">$</span> <span class="cursor"></span></div>
+
+  </div>
+
+  <div class="statusbar">
+    <span>~/portfolio · <span class="ok">main</span></span>
+    <span>UTF-8 · LF · <span class="ok">connected</span></span>
+    <span>© 2026 Pedro Chaves</span>
+  </div>
+
+</div>
+
+
+
+<script src="script.js" defer></script>
+</body>
+</html>
