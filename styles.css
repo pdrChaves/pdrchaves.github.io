@@ -494,12 +494,18 @@ a:hover { opacity: 0.7; }
 @media (max-width: 720px) {
   .window { margin: 0; border-radius: 0; border-left: none; border-right: none; }
   .content { padding: 20px 18px 40px; }
-  .ascii { font-size: 7px; }
+  /* ASCII escala com a largura da tela pra nunca quebrar */
+  .ascii {
+    font-size: clamp(5px, 1.9vw, 10px);
+    line-height: 1.05;
+    overflow-x: hidden;
+  }
   .header-row {
     flex-direction: column-reverse;
     gap: 18px;
     align-items: flex-start;
   }
+  .header-row .ascii { width: 100%; }
   .avatar, .avatar-placeholder { width: 90px; height: 90px; }
   .label { display: block; min-width: 0; margin-top: 6px; }
   .skill-table td:first-child { width: auto; }
