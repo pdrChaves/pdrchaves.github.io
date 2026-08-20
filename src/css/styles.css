@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 :root {
   --bg: #0d0e0c;
   --bg-alt: #111311;
@@ -213,17 +215,31 @@ a:hover { opacity: 0.7; }
 
 .arrow { color: var(--accent); margin-right: 8px; }
 
+.status-ok { color: var(--accent); }
+
+/* Nome como h1: semantica de titulo, aparencia de linha de saida */
+.name {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: inherit;
+  color: var(--fg);
+  margin-bottom: 8px;
+}
+
 /* Log entries com tags variadas */
 .log-tag-study { color: var(--pink); }
 .log-tag-build { color: var(--accent); }
 .log-tag-learn { color: var(--warn); }
 
-/* Carrossel de certificados — auto-rotativo */
+/* Carrossel de certificados — duas linhas, auto-rotativo lento */
 .certs-wrapper {
   position: relative;
   margin: 8px 0 16px;
   overflow: hidden;
-  /* fade nas bordas pra suavizar entrada/saída */
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* fade nas bordas pra suavizar entrada/saida */
   mask-image: linear-gradient(
     to right,
     transparent 0,
@@ -240,20 +256,33 @@ a:hover { opacity: 0.7; }
   );
 }
 
-.certs-track {
+/* Cada linha rola de forma independente. A duracao base vem do JS (--dur),
+   calculada pelo numero de cards, pra velocidade ficar constante e lenta.
+   --dur-scale multiplica isso por contexto (touch roda mais devagar). */
+.certs-row {
   display: flex;
   gap: 14px;
   width: max-content;
-  animation: scroll-certs 60s linear infinite;
+  animation-name: scroll-certs;
+  animation-duration: calc(var(--dur, 90s) * var(--dur-scale, 1));
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
 }
 
-.certs-wrapper:hover .certs-track {
+/* A segunda linha corre no sentido oposto: da leitura mais calma ao bloco */
+#certsRow2 { animation-direction: reverse; }
+
+/* .is-paused vem do JS: toque longo em telas sem mouse */
+.certs-wrapper:hover .certs-row,
+.certs-wrapper:focus-within .certs-row,
+.certs-wrapper.is-paused .certs-row {
   animation-play-state: paused;
 }
 
 @keyframes scroll-certs {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(-50% - 7px)); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(calc(-50% - 7px), 0, 0); }
 }
 
 .cert-card {
@@ -272,7 +301,8 @@ a:hover { opacity: 0.7; }
   cursor: pointer;
 }
 
-.cert-card:hover {
+.cert-card:hover,
+.cert-card:focus-visible {
   border-color: var(--accent);
   background: rgba(125, 216, 125, 0.05);
   transform: translateY(-2px);
@@ -322,6 +352,8 @@ a:hover { opacity: 0.7; }
   color: var(--accent);
 }
 
+.hint-touch { display: none; }
+
 /* Estados do carrossel (loading/erro) */
 .cert-status {
   color: var(--dim);
@@ -335,14 +367,20 @@ a:hover { opacity: 0.7; }
   color: var(--warn);
 }
 
-/* Respeita preferência de movimento reduzido */
+/* Sem hover (touch): nada de animacao automatica, o dedo controla o scroll */
+/* Touch (celular/tablet): o movimento continua, so que bem mais lento.
+   Sem mouse nao ha hover pra pausar, entao o toque longo faz esse papel
+   (ver certsWrapper em src/js/script.js). */
+@media (hover: none) {
+  .hint-hover { display: none; }
+  .hint-touch { display: inline; }
+  .certs-row { --dur-scale: 2.2; }
+}
+
+/* Respeita preferencia de movimento reduzido */
 @media (prefers-reduced-motion: reduce) {
-  .certs-track {
-    animation: none;
-  }
-  .certs-wrapper {
-    overflow-x: auto;
-  }
+  .certs-row { animation: none; }
+  .certs-wrapper { overflow-x: auto; }
 }
 
 /* Tabela de skills */
@@ -462,7 +500,17 @@ a:hover { opacity: 0.7; }
   border-radius: 4px;
 }
 
-.contact-box a { display: inline-block; margin-right: 18px; }
+.contact-box a {
+  display: inline-block;
+  margin-right: 18px;
+  /* Alvo de toque confortavel: 36px de altura mesmo com fonte de 14px */
+  min-height: 36px;
+  line-height: 36px;
+}
+
+.contact-box p { margin-bottom: 0; }
+
+.note-after { margin-top: 10px; }
 
 /* Cursor piscando final */
 .cursor {

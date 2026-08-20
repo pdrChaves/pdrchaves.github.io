@@ -3,12 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pedro Chaves — desenvolvedor full-stack em Cruzeiro/SP. Java, JavaScript, Python e Node.js. Projetos, certificados e contato.">
+<meta name="author" content="Pedro Augusto Chaves da Silva">
+<meta name="theme-color" content="#0d0e0c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pedro Chaves · dev">
+<meta property="og:description" content="Desenvolvedor full-stack. Java, JavaScript, Python e Node.js.">
+<meta property="og:locale" content="pt_BR">
 <title>Pedro Chaves · dev</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%230d0e0c'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-size='32' font-weight='bold' fill='%237dd87d'%3E%26gt;_%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="src/css/styles.css">
 </head>
 <body>
 
@@ -37,7 +44,7 @@
  ~/pdrChaves · full-stack</pre>
 
       <div class="avatar-placeholder">
-        <img src="fotofotofoto.jpeg" alt="Pedro Chaves" class="avatar">
+        <img src="assets/img/avatar.jpeg" alt="Pedro Chaves" class="avatar">
       </div>
     </div>
 
@@ -48,12 +55,12 @@
     <!-- WHOAMI -->
     <div class="prompt"><span class="user">pdrChaves</span><span class="at">@</span><span class="host">portfolio</span><span class="sym">:</span><span class="path">~</span><span class="sym">$</span> whoami</div>
     <div class="out fade-in">
-      <p><span class="arrow">→</span><strong>Pedro Augusto Chaves da Silva</strong></p>
+      <h1 class="name"><span class="arrow">→</span>Pedro Augusto Chaves da Silva</h1>
       <p><span class="label">role:</span> full-stack developer</p>
       <p><span class="label">localização:</span> Cruzeiro, São Paulo · GMT-3</p>
       <p><span class="label">formação:</span> Análise e Desenvolvimento de Sistemas · FATEC Cruzeiro</p>
       <p><span class="label">interesse:</span> Desenvolvimento web, inteligência artificial e automações</p>
-      <p><span class="label">status:</span> <span style="color: var(--accent);">● disponível para projetos</span></p>
+      <p><span class="label">status:</span> <span class="status-ok">● disponível para projetos</span></p>
     </div>
 
     <!-- CAT ABOUT -->
@@ -160,11 +167,11 @@
     <!-- CERTIFICADOS (carregados dinamicamente do GitHub) -->
     <div class="prompt"><span class="user">pdrChaves</span><span class="at">@</span><span class="host">portfolio</span><span class="sym">:</span><span class="path">~/certs</span><span class="sym">$</span> curl github.com/pdrChaves/Certificates-of-Completion/certificados.json</div>
     <div class="out fade-in">
-      <p class="cert-hint">passe o mouse para pausar</p>
-      <div class="certs-wrapper">
-        <div class="certs-track" id="certsTrack">
-          <p class="cert-status" id="certsStatus">carregando certificados...</p>
-        </div>
+      <p class="cert-hint"><span class="hint-hover">passe o mouse para pausar</span><span class="hint-touch">toque e segure para pausar</span></p>
+      <div class="certs-wrapper" id="certsWrapper">
+        <p class="cert-status" id="certsStatus">carregando certificados...</p>
+        <div class="certs-row" id="certsRow1" aria-label="certificados, linha 1"></div>
+        <div class="certs-row" id="certsRow2" aria-label="certificados, linha 2"></div>
       </div>
     </div>
 
@@ -173,12 +180,12 @@
     <div class="out fade-in">
       <p><span class="comment"># abrindo canais...</span></p>
       <div class="contact-box">
-        <p style="margin-bottom: 12px;"><span class="label">email:</span> <a href="mailto:dev.pedrochaves@gmail.com">dev.pedrochaves@gmail.com</a></p>
-        <p style="margin-bottom: 12px;"><span class="label">github:</span> <a href="https://github.com/pdrChaves" target="_blank">github.com/pdrChaves ↗</a></p>
-        <p style="margin-bottom: 12px;"><span class="label">linkedin:</span> <a href="https://www.linkedin.com/in/pdr-chaves/" target="_blank">linkedin.com/in/pdr-chaves ↗</a></p>
-        <p><span class="label">twitter:</span> <a href="https://x.com/_devPdr" target="_blank">@_devPdr ↗</a></p>
+        <p><span class="label">email:</span> <a href="mailto:dev.pedrochaves@gmail.com">dev.pedrochaves@gmail.com</a></p>
+        <p><span class="label">github:</span> <a href="https://github.com/pdrChaves" target="_blank" rel="noopener">github.com/pdrChaves ↗</a></p>
+        <p><span class="label">linkedin:</span> <a href="https://www.linkedin.com/in/pdr-chaves/" target="_blank" rel="noopener">linkedin.com/in/pdr-chaves ↗</a></p>
+        <p><span class="label">twitter:</span> <a href="https://x.com/_devPdr" target="_blank" rel="noopener">@_devPdr ↗</a></p>
       </div>
-      <p style="margin-top: 10px;"><span class="comment"># aberto a freelas, contratos e papos sobre tech.</span></p>
+      <p class="note-after"><span class="comment"># aberto a freelas, contratos e papos sobre tech.</span></p>
     </div>
 
     <!-- EXIT -->
@@ -194,6 +201,6 @@
 
 </div>
 
-<script src="script.js" defer></script>
+<script src="src/js/script.js" defer></script>
 </body>
 </html>

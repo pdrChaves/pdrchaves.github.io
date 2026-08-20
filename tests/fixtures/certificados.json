@@ -1,0 +1,9 @@
+[
+  { "issuer": "Alura",      "name": "Java: aplicando a Orientação a Objetos", "date": "2025", "hours": "8h",  "file": "alura-java-oo.pdf" },
+  { "issuer": "Alura",      "name": "Node.js: criando uma API REST",          "date": "2026", "hours": "10h", "file": "alura-node-api.pdf" },
+  { "issuer": "FIAP",       "name": "Inteligência Artificial na prática",     "date": "2025", "hours": "40h", "file": "fiap-ia.pdf" },
+  { "issuer": "Rocketseat", "name": "Fundamentos de Docker",                  "date": "2026", "hours": "6h",  "file": "rs-docker.pdf" },
+  { "issuer": "Udemy",      "name": "Git e GitHub do zero ao avançado",       "date": "2025", "hours": "12h", "file": "udemy-git.pdf" },
+  { "issuer": "Alura",      "name": "PostgreSQL: consultas e modelagem",      "date": "2026", "hours": "14h", "file": "alura-postgres.pdf" },
+  { "issuer": "Coursera",   "name": "Python for Everybody",                   "date": "2025", "hours": "20h", "file": "coursera-python.pdf" }
+]

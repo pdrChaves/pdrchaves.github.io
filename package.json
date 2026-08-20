@@ -1,0 +1,28 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio pessoal — Pedro Chaves",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node tests/responsive.test.mjs",
+    "test:fast": "node tests/responsive.test.mjs --no-shot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pdrChaves/pdrchaves.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/pdrChaves/pdrchaves.github.io/issues"
+  },
+  "homepage": "https://github.com/pdrChaves/pdrchaves.github.io#readme",
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  },
+  "private": true
+}
