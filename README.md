@@ -56,4 +56,4 @@ falha de rede, JSON vazio, XSS no JSON, `prefers-reduced-motion`, ritmo do
 carrossel, pausa por hover e por foco de teclado, e higiene de metadados.
 
 Falhas saem no console com o detalhe da medição, e o resultado bruto fica em
-`tests/last-run.json`.
+`tests/last-run.json`
