@@ -230,6 +230,7 @@ a:hover { opacity: 0.7; }
 .log-tag-study { color: var(--pink); }
 .log-tag-build { color: var(--accent); }
 .log-tag-learn { color: var(--warn); }
+.log-tag-work { color: var(--pink); }
 
 /* Carrossel de certificados — duas linhas, auto-rotativo lento */
 .certs-wrapper {
@@ -307,6 +308,43 @@ a:hover { opacity: 0.7; }
   background: rgba(125, 216, 125, 0.05);
   transform: translateY(-2px);
   opacity: 1;
+}
+
+/* Preview da primeira pagina do certificado. Fundo em vez de <img>:
+   e decorativa (o texto abaixo ja descreve o card) e o placeholder
+   aparece enquanto o PDF e renderizado. */
+.cert-thumb {
+  position: relative;
+  display: block;
+  aspect-ratio: 1.414 / 1; /* A4 deitado, formato da maioria */
+  margin-bottom: 4px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background-color: var(--bg-alt);
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.cert-thumb::after {
+  content: "rendering...";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--dim);
+  font-size: 10px;
+}
+
+.cert-thumb.is-ready::after { content: none; }
+.cert-thumb.is-error::after,
+.cert-thumb:not([data-src])::after { content: "[sem preview]"; }
+
+.cert-card:hover .cert-thumb,
+.cert-card:focus-visible .cert-thumb {
+  border-color: var(--accent);
 }
 
 .cert-issuer {
@@ -455,6 +493,17 @@ a:hover { opacity: 0.7; }
 .project:hover .project-link {
   opacity: 0.85;
 }
+
+/* Experiencia: mesmo card do projeto, mas sem link, entao sem cara de clicavel */
+.project.job { cursor: default; }
+
+.project.job:hover {
+  border-color: var(--line);
+  background: rgba(125, 216, 125, 0.015);
+  transform: none;
+}
+
+.job-running { color: var(--accent); }
 
 .project-desc {
   color: var(--fg);

@@ -21,6 +21,13 @@ const JSON_PATH = 'certificados.json';
 // derivada disso, entao adicionar certificados nao acelera o carrossel.
 const SECONDS_PER_CARD = 9;
 
+// PDF.js so e baixado quando o primeiro preview entra na tela
+const PDFJS_URL = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs';
+const PDFJS_WORKER_URL = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs';
+
+// Largura em px da imagem gerada (2x o card, fica nitido em tela retina)
+const PREVIEW_WIDTH = 480;
+
 (async function loadCerts() {
   const row1 = document.getElementById('certsRow1');
   const row2 = document.getElementById('certsRow2');
@@ -78,6 +85,91 @@ function renderCerts(certs, row1, row2) {
 
     row.style.setProperty('--dur', `${count * SECONDS_PER_CARD}s`);
   });
+
+  observePreviews(row1.parentElement);
+}
+
+// ===== PREVIEW DOS CERTIFICADOS =====
+// Cada arquivo e renderizado uma vez so; o card original e o clone do loop
+// reaproveitam a mesma imagem.
+const previewCache = new Map();
+let pdfjsPromise = null;
+
+// Gera o preview so quando o card chega perto da area visivel:
+// sao dezenas de PDFs e a maioria nunca e vista de uma vez.
+function observePreviews(wrapper) {
+  const thumbs = wrapper.querySelectorAll('.cert-thumb[data-src]');
+  if (!thumbs.length) return;
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      io.unobserve(entry.target);
+      fillPreview(entry.target);
+    });
+  }, { root: wrapper, rootMargin: '0px 300px' });
+
+  thumbs.forEach(t => io.observe(t));
+}
+
+async function fillPreview(thumb) {
+  const src = thumb.dataset.src;
+  try {
+    const url = await getPreview(src);
+    thumb.style.backgroundImage = `url("${url}")`;
+    thumb.classList.add('is-ready');
+  } catch (err) {
+    // Sem preview o card continua funcional: so fica o placeholder
+    console.warn('preview indisponivel:', src, err);
+    thumb.classList.add('is-error');
+  }
+}
+
+function getPreview(src) {
+  if (!previewCache.has(src)) {
+    const job = /\.pdf$/i.test(src) ? renderPdfPreview(src) : Promise.resolve(src);
+    previewCache.set(src, job);
+  }
+  return previewCache.get(src);
+}
+
+function loadPdfjs() {
+  if (!pdfjsPromise) {
+    pdfjsPromise = import(PDFJS_URL).then(lib => {
+      lib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER_URL;
+      return lib;
+    });
+  }
+  return pdfjsPromise;
+}
+
+// Desenha a primeira pagina do PDF num canvas e devolve um blob URL
+async function renderPdfPreview(src) {
+  const pdfjs = await loadPdfjs();
+  // verbosity 0: alguns PDFs emitidos pelas plataformas geram avisos inofensivos
+  const doc = await pdfjs.getDocument({ url: src, verbosity: 0 }).promise;
+  try {
+    const page = await doc.getPage(1);
+    const base = page.getViewport({ scale: 1 });
+    const viewport = page.getViewport({ scale: PREVIEW_WIDTH / base.width });
+
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(viewport.width);
+    canvas.height = Math.round(viewport.height);
+    await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+
+    const blob = await new Promise(res => canvas.toBlob(res, 'image/webp', 0.85));
+    if (!blob) throw new Error('falha ao gerar imagem');
+    return URL.createObjectURL(blob);
+  } finally {
+    doc.destroy();
+  }
+}
+
+// URL direta do arquivo (raw permite CORS, o github.com/blob nao)
+function rawFileUrl(file) {
+  const filePath = file.split('/').map(encodeURIComponent).join('/');
+  return `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${filePath}`;
 }
 
 // Em telas sem mouse nao existe hover para pausar o carrossel.
@@ -115,7 +207,14 @@ function buildCertCard(cert) {
   card.href = pdfUrl;
   card.target = '_blank';
   card.rel = 'noopener';
+
+  // "preview" no JSON sobrepoe a imagem gerada a partir do arquivo
+  const previewSrc = cert.preview
+    ? (/^https?:\/\//.test(cert.preview) ? cert.preview : rawFileUrl(cert.preview))
+    : (cert.file ? rawFileUrl(cert.file) : '');
+
   card.innerHTML = `
+    <span class="cert-thumb" aria-hidden="true"></span>
     <span class="cert-issuer">${escapeHtml(cert.issuer || '')}</span>
     <span class="cert-name">${escapeHtml(cert.name || '')}</span>
     <span class="cert-meta">
@@ -123,6 +222,8 @@ function buildCertCard(cert) {
       <span class="cert-link">ver ↗</span>
     </span>
   `;
+  // via dataset, e nao no template, pra nao depender de escape de atributo
+  if (previewSrc) card.querySelector('.cert-thumb').dataset.src = previewSrc;
   return card;
 }
 

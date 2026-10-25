@@ -32,6 +32,12 @@ Formato esperado de cada item:
 { "issuer": "Alura", "name": "Node.js: criando uma API REST", "date": "2026", "hours": "10h", "file": "alura-node-api.pdf" }
 ```
 
+Cada card mostra no topo um preview da primeira página do arquivo, renderizado
+no navegador com PDF.js (carregado do CDN só quando o primeiro card aparece).
+O preview é gerado sob demanda, quando o card se aproxima da área visível, e
+fica em cache para os clones do loop. Para usar outra imagem, adicione
+`"preview": "arquivo.png"` (caminho no repo ou URL completa) ao item.
+
 O carrossel tem **duas linhas** que correm em sentidos opostos. A duração da
 animação é calculada em `SECONDS_PER_CARD` (`src/js/script.js`): aumentar o
 número de certificados alonga a animação em vez de acelerá-la, então o ritmo
